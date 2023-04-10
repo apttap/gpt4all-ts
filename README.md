@@ -25,7 +25,7 @@ yarn add gpt4all
 In your TypeScript (or JavaScript) project, import the `GPT4All` class from the `gpt4all-ts` package:
 
 ```typescript
-import { GPT4All } from 'gpt4all';
+import { GPT4All } from "gpt4all";
 ```
 
 ### 3. Instantiate and use the GPT4All class
@@ -39,32 +39,37 @@ Happy coding! 💻🎉
 Below is an example of how to use the `GPT4All` class in TypeScript:
 
 ```typescript
-import { GPT4All } from 'gpt4all';
+import { GPT4All } from "gpt4all";
 
 const main = async () => {
-    // Instantiate GPT4All with default or custom settings
-    const gpt4all = new GPT4All('gpt4all-lora-unfiltered-quantized', true); // Default is 'gpt4all-lora-quantized' model
-  
-    // Initialize and download missing files
-    await gpt4all.init();
+  // Instantiate GPT4All with default or custom settings
+  // Default is 'gpt4all-lora-quantized' model
+  const gpt4all = new GPT4All("gpt4all-lora-unfiltered-quantized", true);
 
-    // Open the connection with the model
-    await gpt4all.open();
-    // Generate a response using a prompt
-    const prompt = 'Tell me about how Open Access to AI is going to help humanity.';
-    const response = await gpt4all.prompt(prompt);
-    console.log(`Prompt: ${prompt}`);
-    console.log(`Response: ${response}`);
-  
-    const prompt2 = 'Explain to a five year old why AI is nothing to be afraid of.';
-    const response2 = await gpt4all.prompt(prompt2);
-    console.log(`Prompt: ${prompt2}`);
-    console.log(`Response: ${response2}`);
-  
-    // Close the connection when you're done
-    gpt4all.close();
-}
-  
+  // Open the connection with the model
+  await gpt4all.open();
+
+  // Generate a response using a prompt
+  const prompt = "What is the meaning of life?";
+  const [readable, promise] = gpt4all.prompt(prompt);
+
+  let output = "";
+  readable.on("data", (chunk) => {
+    output += chunk;
+    console.clear();
+    console.log(output);
+    // The meaning of life can be interpreted in many ways,
+    // but ultimately it comes down to finding purpose and
+    // fulfillment through whatever activities or pursuits
+    // bring you joy and satisfaction.
+  });
+
+  // Wait for the prompt to finish
+  await promise;
+
+  // Close the connection when you're done
+  await gpt4all.close();
+};
 main().catch(console.error);
 ```
 
@@ -72,20 +77,19 @@ To use the library, simply import the `GPT4All` class from the `gpt4all-ts` pack
 
 After the gpt4all instance is created, you can open the connection using the `open()` method. To generate a response, pass your input prompt to the `prompt()` method. Finally, remember to close the connection using the `close()` method once you're done interacting with the model.
 
-Here's some output from the GPT4All model which you can look forward to: 
+Here's some output from the GPT4All model which you can look forward to:
 
 > **Prompt:** Tell me about how Open Access to AI is going to help humanity.
-> 
+>
 > **Response:** Open access to AI has already helped in numerous ways, such as improving medical diagnosis and treatment options through machine learning algorithms that analyze patient data more efficiently than humans can alone. It's also helping with the development of autonomous vehicles by using deep neural networks for image recognition and object detection tasks. Open Access is expected to play a crucial role in solving complex problems like climate change, drug discovery or even creating new jobs through AI-enabled automation technologies such as robotics process automation (RPA).
 
 > **Prompt:** Explain to a five year old why AI is nothing to be afraid of.
-> 
+>
 > **Response:** Artificial Intelligence, also known as AI or machine learning, are systems that can learn and improve themselves through data analysis without being explicitly programmed for each task they perform. They have the ability to understand complex patterns in large datasets which makes them useful tools across various industries such as healthcare, transportation, finance etc.
 >
 > AI is not something we should be afraid of because it has been designed with our best interests at heart and can help us make better decisions based on data analysis rather than gut feelings or personal preferences. AI systems are also becoming more transparent to users so that they understand how the system works, which helps build trust between them and their machines.
 >
 > AI is here to stay as it has already been adopted by many industries for its benefits in terms of cost savings, efficiency gains etc., but we need not be afraid or suspicious about this technology because AI can also benefit us if used properly with the right intentions behind it.
-
 
 ## Citation 📝
 

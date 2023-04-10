@@ -1,3 +1,5 @@
+/// <reference types="node" />
+import { Readable } from "stream";
 export declare class GPT4All {
     private bot;
     private model;
@@ -11,5 +13,5 @@ export declare class GPT4All {
     private downloadExecutable;
     private downloadModel;
     private downloadFile;
-    prompt(prompt: string): Promise<string>;
+    prompt(prompt: string): [Readable, Promise<void>];
 }
